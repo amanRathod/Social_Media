@@ -5,9 +5,9 @@
 /* eslint-disable prettier/prettier */
 import { useContext, useEffect, useState } from 'react';
 
-import { LockClosedIcon, LoginIcon} from '@heroicons/react/solid';
+import { LockClosedIcon, LoginIcon } from '@heroicons/react/solid';
 import { Link, useHistory } from 'react-router-dom';
-
+import PasswordForget from './forget_password';
 // eslint-disable-next-line quotes
 // eslint-disable-next-line import/named
  import {signInWithGoogle, signInWithFacebook } from '../library/firebase.js';
@@ -27,7 +27,18 @@ export default function Login() {
   const [error, setError] = useState('');
   const isInvalid = password === '' || email === '';
 
-  const handleLogin = async (event) => {}
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      history.push(ROUTES.DASHBOARD);
+    } catch (error) {
+      setEmail('');
+      setPassword('');
+      setError(error.message);
+    }
+  }
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -39,7 +50,7 @@ export default function Login() {
   }
 
   useEffect(() => {
-    document.title = 'Login';
+    document.title = 'Login - Socail Media';
   }, []);
 
 
@@ -99,9 +110,9 @@ export default function Login() {
             </div>
 
             <div className="text-xs">
-              <a href="#" className="font-medium text-indigo-light hover:text-indigo-dark">
+            <Link to={ROUTES.PASS_FORGET} className="text-indigo-light hover:text-indigo-dark font-bold">
                 Forgot your password?
-              </a>
+            </Link>
             </div>
           </div>
           
@@ -143,6 +154,7 @@ export default function Login() {
             Don't have an account?{` `}
             <Link to={ROUTES.SIGN_UP} className="text-indigo-light font-bold">Sign up</Link>
           </p>
+          <PasswordForget/>
         </div>
 
     </div>

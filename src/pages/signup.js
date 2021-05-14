@@ -66,7 +66,7 @@ export default function Signup() {
   };
 
   useEffect(() => {
-    document.title = 'Sign up - instagram';
+    document.title = 'Sign up - Social Media';
   }, []);
 
   const handleEmail = (e) => {
@@ -151,7 +151,7 @@ export default function Signup() {
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
           <p className="text-sm">
             Have an account?{` `}
-            <Link to={ROUTES.DASHBOARD} className="font-bold text-blue-medium">
+            <Link to={ROUTES.LOGIN} className="font-bold text-blue-medium">
               Login
             </Link>
           </p>
