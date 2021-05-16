@@ -4,7 +4,7 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable prettier/prettier */
 import { useContext, useEffect, useState } from 'react';
-
+import * as firebase from 'firebase';
 import { LockClosedIcon, LoginIcon } from '@heroicons/react/solid';
 import { Link, useHistory } from 'react-router-dom';
 import PasswordForget from './forget_password';
@@ -23,7 +23,7 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [remember, setRemember] = useState(false);
   const [error, setError] = useState('');
   const isInvalid = password === '' || email === '';
 
@@ -31,8 +31,10 @@ export default function Login() {
     event.preventDefault();
 
     try {
+      await firebase.auth().setPersistence(remember ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION);
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      history.push(ROUTES.DASHBOARD);
+      
+      history.push(ROUTES.SIGN_UP);
     } catch (error) {
       setEmail('');
       setPassword('');
@@ -102,9 +104,12 @@ export default function Login() {
                 id="remember_me"
                 name="remember_me"
                 type="checkbox"
+                onClick={() => setRemember(true)}
                 className="h-4 w-4 text-indigo-dark focus:ring-indigo-dark border-gray-light rounded"
               />
-              <label htmlFor="remember_me" className="ml-2 block text-xs text-gray-900">
+              <label htmlFor="remember_me"
+                className="ml-2 block text-xs text-gray-900"
+               >
                 Remember me
               </label>
             </div>
