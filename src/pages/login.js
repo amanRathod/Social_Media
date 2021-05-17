@@ -15,6 +15,13 @@ import FirebaseContext from '../context/firebase';
 
 import * as ROUTES from '../constants/routes';
 
+// ==== STYLE for INPUT ====
+const Inputs = {
+  
+  boxShadow: 'inset 6px 6px 6px #cbced1, inset -6px -6px 6px white'
+
+
+}
 
 export default function Login() {
   const history = useHistory();
@@ -57,16 +64,21 @@ export default function Login() {
 
 
   return (
-    <div className="container flex mx-auto max-w-screen-md items-center h-screen">
+    <div className="container flex mx-auto max-w-screen-md items-center h-screen"
+      >
      
     <div className="flex w-3/5 ">
       <img src="/images/landing-photo.png" alt="Social Media Photo" className="" />
     </div>
     
-    <div className="flex flex-col w-2/5">
-      <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4 rounded ">
-        <h1 className="flex justify-center w-full">
-          <img src="/images/2.jpg" alt="Social Media" className="mt-2 w-6/12 mb-4"/>
+    <div className="flex flex-col w-2/5" >
+      <div className="flex flex-col items-center bg-white p-4 border border-gray-primary mb-4 rounded "
+        style={{boxShadow: `14px 14px 20px  #cbced1, -14px -14px 20px white`}}>
+        <h1 className="flex justify-center w-full "
+          >
+          <img 
+          style={{boxShadow: '7px 7px 10px #cbced1, -7px -7px 10px white'}}
+          src="/images/2.jpg" alt="Social Media" className="rounded-full mt-2 w-6/12 mb-4"/>
         </h1>
 
         {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
@@ -84,6 +96,7 @@ export default function Login() {
             name="email" 
             type="text"
             value={email} 
+            style={Inputs}
             onChange={handleEmail}
           />
         
@@ -91,10 +104,11 @@ export default function Login() {
           <input 
             placeholder="Password"
             aria-label="Enter your password"
-            className="mt-2 mb-3 text-gray-base w-full text-sm px-3 py-1 border border-gray-primary rounded-md focus:outline-none"
+            className="mt-2 mb-2 text-gray-base w-full px-3 py-1 border border-gray-primary rounded-md tracking-tighter text-sm focus:outline-none"
             name="password" 
             type="password"
             value={password} 
+            style={Inputs}
             onChange={handlePassword}
           />
 
@@ -124,7 +138,8 @@ export default function Login() {
           <button
             disabled={isInvalid}
             type="submit"
-            className={` relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-dark hover:bg-indigo-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+            style={{boxShadow: '6px 6px 6px #cbced1, -6px -6px 6px white'}}
+            className={` relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-dark hover:bg-indigo-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-light
           ${isInvalid && 'opacity-70'}`}
           >
             <span className="absolute left-1 inset-y-0 flex items-center pl-3">
@@ -140,8 +155,12 @@ export default function Login() {
         
 
         <button type="submit" className="focus:outline-none"
-        onClick={signInWithFacebook}>
-          <img src="images/icons/facebooks.png" alt="Social Media" className="mt-4 mr-3 w-6/12  mb-2 transform hover:-translate-y-1 hover:scale-110 focus:outline-none"/>
+          onClick={signInWithFacebook}
+          >
+          <img 
+          src="images/icons/facebooks.png" alt="Social Media" className="mt-4 mr-3 w-6/12  mb-2 focus:outline-none transform hover:-translate-y-1 hover:scale-110"
+
+          />
         </button>
         
         <button type="submit" className="focus:outline-none"
@@ -154,15 +173,18 @@ export default function Login() {
       </div>
       
 
-        <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
-          <p className="text-sm">
-            Don't have an account?{` `}
-            <Link to={ROUTES.SIGN_UP} className="text-indigo-light font-bold">Sign up</Link>
-          </p>
-          <PasswordForget/>
-        </div>
+      <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary"
+        style={{boxShadow: '14px 14px 20px #cbced1, -14px -14px 20px white'}}>
+        <p className="text-sm">
+          Don't have an account?{` `}
+          <Link to={ROUTES.SIGN_UP} className="text-indigo-light font-bold">Sign up</Link>
+        </p>
+        {/* <PasswordForget/> */}
+      </div>
 
     </div>
   </div>
   );
 }
+
+// transform hover:-translate-y-1 hover:scale-110

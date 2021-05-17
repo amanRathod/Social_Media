@@ -19,7 +19,7 @@ export default function App() {
     <Router>
       <Suspense fallback={renderLoader()}>
         <Switch>
-          <Route path={ROUTES.DASHBOARD} component={Login} exact />
+          <Route path={ROUTES.LOGIN} component={Login} exact />
           <Route path={ROUTES.SIGN_UP} component={SignUp} exact />
           
           <Route path={ROUTES.PASS_FORGET} component={PasswordForget} exact/>
