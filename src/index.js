@@ -49,25 +49,6 @@ ReactDOM.render(
 // -> npm install autoprefixer -D
 // -> npm install @heroicons/react
 
-// add below code in app.cs
-// @tailwind base;
-// @tailwind components;
-// @tailwind utilities;
-
-// add below code in postcss.config.js
-// module.exports = {
-    
-//   plugins: [require('tailwindcss'), require('autoprefixer')]
-
-// };
-
-// add below code in tailwind.config.js
-// module.exports = {
-//   future: {
-//     removeDeprecatedGapUtilities: true
-//   },
-// };
-
 
 // package.json. add below code in scripts
 // "build:css": "postcss src/styles/tailwind.css -o src/styles/app.css",
@@ -75,4 +56,27 @@ ReactDOM.render(
 //     "react-scripts:start": "sleep 5 && react-scripts start",
 //     "start": "run-p watch:css react-scripts:start",
 //     "build": "run-s build:css react-scripts:build",
+
+
+
+// add below code in app.css(styles folder in src)
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+// make file postcss.config.js 
+// add below code in postcss.config.js
+// module.exports = {
+    
+//   plugins: [require('tailwindcss'), require('autoprefixer')]
+
+// };
+
+// make tailwind.config.js
+// add below code in tailwind.config.js
+// module.exports = {
+//   future: {
+//     removeDeprecatedGapUtilities: true
+//   },
+// };
 
