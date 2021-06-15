@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import './wdyr';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -17,7 +18,7 @@ ReactDOM.render(
 // npm install date-fns
 // npm install firebase
 // npm install react-loading-skeleton
-// install eslint(if you need) command: exec 3<&1;bash <&3 <(curl https://raw.githubusercontent.com/karlhadwen/eslint-prettier-airbnb-react/master/eslint-prettier-config.sh 2> /dev/null)
+// install eslint command: exec 3<&1;bash <&3 <(curl https://raw.githubusercontent.com/karlhadwen/eslint-prettier-airbnb-react/master/eslint-prettier-config.sh 2> /dev/null)
 
 // client side rendered app: react (cra)
 // -> database which is Firebase
@@ -59,7 +60,7 @@ ReactDOM.render(
 
 
 
-// add below code in app.css(styles folder in src)
+// add below code in tailwind.css(styles folder in src) and create app.css in same folder
 // @tailwind base;
 // @tailwind components;
 // @tailwind utilities;
@@ -80,3 +81,11 @@ ReactDOM.render(
 //   },
 // };
 
+// if Error : install postcss 8 and above then paste the following code
+// npm uninstall tailwindcss postcss autoprefixer
+// npm install tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+
+
+
+/// === extra installation ===
+//  1) npm install @welldone-software/why-did-you-render --save-dev

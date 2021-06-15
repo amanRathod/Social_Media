@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+// to listen if user is login or logout
 import {useEffect, useState, useContext} from 'react';
 import FirebaseContext from '../context/firebase';
 
@@ -27,7 +28,7 @@ export default function User() {
 
     }, [firebase]);
 
-    return ( user );
+    return ( user ); // reson to return is to use userContext so that you dont have to call user again and again.
     
 }
 

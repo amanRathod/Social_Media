@@ -9,10 +9,7 @@ import * as ROUTES from '../constants/routes';
 import { doesUsernameExists } from '../services/firebase';
 
 const Inputs = {
-  
   boxShadow: 'inset 6px 6px 6px #cbced1, inset -6px -6px 6px white'
-
-
 }
 
 export default function Signup() {
@@ -30,8 +27,9 @@ export default function Signup() {
 
   const handleSignup = async (event) => {
     event.preventDefault();
-
+    // console.log('AMan Rathod --->')
     const usernameExists = await doesUsernameExists(username);
+    // console.log('usernaemexists',usernameExists)
     if (!usernameExists) {
       try {
         const createdUserResult = await firebase
@@ -43,7 +41,7 @@ export default function Signup() {
         await createdUserResult.user.updateProfile({
           displayName: username
         });
-
+        console.log('username', username)
         // firebase user collection (create a document)
         await firebase
           .firestore()
@@ -67,7 +65,7 @@ export default function Signup() {
       }
     } else {
       setUsername('');
-      setError('That username is already taken, please try another.');
+      setError('This username is already taken, please try another.');
     }
 
   };
@@ -75,14 +73,6 @@ export default function Signup() {
   useEffect(() => {
     document.title = 'Sign up - Social Media';
   }, []);
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  }
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  }
 
 
   return (
@@ -133,7 +123,7 @@ export default function Signup() {
               type="text"
               style={Inputs}
               value={email} 
-              onChange={handleEmail}
+              onChange={({ target }) => setEmail(target.value)}
             />
 
             <input 
@@ -144,7 +134,7 @@ export default function Signup() {
               type="password"
               style={Inputs}
               value={password} 
-              onChange={handlePassword}
+              onChange={({ target }) => setPassword(target.value)}
             />
 
             <button

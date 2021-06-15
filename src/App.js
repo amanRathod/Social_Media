@@ -12,22 +12,22 @@ import UserContext from './context/user';
 const Login = lazy(() => import('./pages/login'));
 const SignUp = lazy(() => import('./pages/signup'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
-const PasswordForget = lazy(() => import('./pages/forget_password'));
+const PasswordForget = lazy(() => import('./pages/forgetPassword'));
 
 const renderLoader = () => <p>Loading...</p>;
 
 export default function App() {
   const user = useAuthListener();
   return (
-    <UserContext.Provider value={{user}}>
+    // it inject user into all component
+    <UserContext.Provider value={{user}}> 
     <Router>
       <Suspense fallback={renderLoader()}>
         <Switch>
-        <Route path={ROUTES.DASHBOARD} component={Dashboard} />
-          <Route path={ROUTES.LOGIN} component={Login} exact />
-          <Route path={ROUTES.SIGN_UP} component={SignUp} exact />
-          
-          <Route path={ROUTES.PASS_FORGET} component={PasswordForget} exact/>
+        
+          <Route path={ROUTES.LOGIN} component={Login} />
+          <Route path={ROUTES.SIGN_UP} component={SignUp} />
+          <Route path={ROUTES.DASHBOARD} component={Dashboard}/>
         </Switch>
       </Suspense>
     </Router>
