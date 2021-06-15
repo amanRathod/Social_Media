@@ -18,8 +18,8 @@ export default function Dashboard() {
        
         <Header />
         <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
-          <Timeline className="w-2/3"/>
-          <Sidebar className="w-1/3"/>
+          <Timeline />
+          <Sidebar />
         </div>
       </div>
     )

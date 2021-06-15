@@ -10,7 +10,7 @@ export default function Sidebar() {
     { docId = '', fullName, username, userId, following }
   } = useUser();
 
-console.log('follownf', following);
+// console.log('follownf', following);
   return (
     <div className="p-4">
       <User username={username} fullName={fullName} />

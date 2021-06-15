@@ -7,11 +7,13 @@ import * as ROUTES from './constants/routes';
 import useAuthListener from './hooks/user-auth-listener';
 import UserContext from './context/user';
 // import PasswordForget from './pages/forget_password';
-
+import ProtectedRoute from './helpers/protected-route'
+import IsUserLoggedIn from './helpers/is-user-logged-in';
 
 const Login = lazy(() => import('./pages/login'));
 const SignUp = lazy(() => import('./pages/signup'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
+const Profile = lazy(() => import('./pages/profile'))
 const PasswordForget = lazy(() => import('./pages/forgetPassword'));
 
 const renderLoader = () => <p>Loading...</p>;
@@ -24,10 +26,20 @@ export default function App() {
     <Router>
       <Suspense fallback={renderLoader()}>
         <Switch>
-        
+          
+          <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD}  path={ROUTES.LOGIN}>
           <Route path={ROUTES.LOGIN} component={Login} />
+          </IsUserLoggedIn>
+          
+          <IsUserLoggedIn user={user} loggedInPath={ROUTES.DASHBOARD}  path={ROUTES.SIGN_UP}>
           <Route path={ROUTES.SIGN_UP} component={SignUp} />
-          <Route path={ROUTES.DASHBOARD} component={Dashboard}/>
+          </IsUserLoggedIn>
+
+          <Route path={ROUTES.PROFILE} component={Profile} />
+          
+          <ProtectedRoute user={user} path={ROUTES.DASHBOARD}>
+            <Route path={ROUTES.DASHBOARD} component={Dashboard} exact/>
+          </ProtectedRoute>
         </Switch>
       </Suspense>
     </Router>

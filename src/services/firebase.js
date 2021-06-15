@@ -36,7 +36,7 @@ export async function getUserByUserId(userId) {
     ...item.data(),
     docId: item.id
   }));
-
+  // console.log('userrr --', user)
   return user;
 }
 
@@ -44,7 +44,7 @@ export async function getUserByUserId(userId) {
 export async function getSuggestedProfiles(userId, following) {
   const result = await firebase.firestore().collection('users').limit(10).get();
 
-  console.log('Result', result);
+  // console.log('Result', result);
   if(result.docs){
   return result.docs.map((user) => ({
     ...user.data(),
@@ -85,4 +85,40 @@ export async function updateFollowedUserFollowers(
         ? FieldValue.arrayRemove(loggedInUserDocId)
         : FieldValue.arrayUnion(loggedInUserDocId)
     });
+}
+
+export async function getPhotos(userId, following) {
+  // [5,4,2] => following
+  console.log('useridd ', userId )
+  const result = await firebase
+    .firestore()
+    .collection('photos')
+    .where('userId', 'in', following) // returns userid of person I'm folloeing
+    .get();
+
+  console.log('result------', result)
+
+  const userFollowedPhotos = result.docs.map((photo) => ({
+    ...photo.data(),
+    docId: photo.id
+  }));
+
+  console.log('userrfolowing',userFollowedPhotos)
+  
+  const photosWithUserDetails = await Promise.all(
+    userFollowedPhotos.map(async (photo) => {
+      let userLikedPhoto = false;
+      if (photo.likes.includes(userId)) {
+        userLikedPhoto = true;
+      }
+      // photo.userId = Ranveer.id
+      const user = await getUserByUserId(photo.userId);
+      // Ranveer
+      const { username } = user[0];
+      return { username, ...photo, userLikedPhoto };
+    })
+  );
+  console.log('phtosWIth use detailhUserDetailss', photosWithUserDetails);
+
+  return photosWithUserDetails;
 }
