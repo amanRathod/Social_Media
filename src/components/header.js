@@ -44,67 +44,6 @@ export default function Headers() {
                   </svg>
                 </Link>
 
-                <button
-                  type="button"
-                  title="Sign Out"
-                  onClick={() => {
-                    firebase.auth().signOut();
-                    history.push(ROUTES.DASHBOARD);
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                      firebase.auth().signOut();
-                      history.push(ROUTES.DASHBOARD);
-                    }
-                  }}
-                >
-                  <svg
-                    className="w-8 mr-6 text-black-light cursor-pointer"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                    />
-                  </svg>
-                </button>
-
-                <div className="flex items-center cursor-pointer">
-                  <Link to={`/p/${user.displayName}`}>
-                    <img
-                      className="rounded-full h-8 w-8 flex"
-                      src={`/images/avatars/${user.displayName}.jpg`}
-                      alt={`${user.displayName} profile`}
-                    />
-                  </Link>
-                </div>
-              </>
-            ) : (
-              <>
-                <Link to={ROUTES.LOGIN}>
-                  <button
-                    type="button"
-                    className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
-                  >
-                    Log In
-                  </button>
-                </Link>
-                <Link to={ROUTES.SIGN_UP}>
-                  <button
-                    type="button"
-                    className="font-bold text-sm rounded text-blue-medium w-20 h-8"
-                  >
-                    Sign Up
-                  </button>
-                </Link>
-              </>
-            )}
-          </div>
         </div>
       </div>
     </header>
