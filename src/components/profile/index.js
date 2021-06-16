@@ -5,7 +5,7 @@ import Photos from './photos';
 import { getUserPhotosByUserId } from '../../services/firebase';
 
 export default function Profile({ user }) {
-  const reducer = (state, newState) => ({ ...state, ...newState });
+  const reducer = (state, newState) => ({ ...state, ...newState }); // useReducer is generally used when object or array is return instead of useState
   const initialState = {
     profile: {},
     photosCollection: null,
@@ -24,6 +24,9 @@ export default function Profile({ user }) {
     }
     getProfileInfoAndPhotos();
   }, [user.username]);
+
+  // eslint-disable-next-line prettier/prettier
+  console.log('profilee', profile)
 
   return (
     <>

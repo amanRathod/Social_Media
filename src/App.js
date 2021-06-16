@@ -15,6 +15,7 @@ const SignUp = lazy(() => import('./pages/signup'));
 const Dashboard = lazy(() => import('./pages/dashboard'));
 const Profile = lazy(() => import('./pages/profile'))
 const PasswordForget = lazy(() => import('./pages/forgetPassword'));
+const NotFound = lazy(() => import('./pages/not-found'))
 
 const renderLoader = () => <p>Loading...</p>;
 
@@ -36,7 +37,7 @@ export default function App() {
           </IsUserLoggedIn>
 
           <Route path={ROUTES.PROFILE} component={Profile} />
-          
+          <Route path={ROUTES.NOT_FOUND} component={NotFound}/>
           <ProtectedRoute user={user} path={ROUTES.DASHBOARD}>
             <Route path={ROUTES.DASHBOARD} component={Dashboard} exact/>
           </ProtectedRoute>

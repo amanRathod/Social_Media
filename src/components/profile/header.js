@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
@@ -5,7 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
 import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
 import UserContext from '../../context/user';
-// import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
+import { DEFAULT_IMAGE_PATH } from '../../constants/path';
 
 export default function Header({
   photosCount,
@@ -26,7 +27,8 @@ export default function Header({
   const activeBtnFollow = user?.username && user?.username !== profileUsername;
 
   const handleToggleFollow = async () => {
-    setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
+    setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile); // if user is already following profileUser then isfollowing->false
+    
     setFollowerCount({
       followerCount: isFollowingProfile ? followerCount - 1 : followerCount + 1
     });
@@ -35,8 +37,9 @@ export default function Header({
 
   useEffect(() => {
     const isLoggedInUserFollowingProfile = async () => {
-      const isFollowing = await isUserFollowingProfile(user.username, profileUserId);
-      setIsFollowingProfile(!!isFollowing);
+      const isFollowing = await isUserFollowingProfile(user.username, profileUserId);// it returns userId if user if folwoing
+ 
+      setIsFollowingProfile(!!isFollowing); // if isfollowing is not null then assign truthy value
     };
 
     if (user?.username && profileUserId) {
@@ -52,16 +55,16 @@ export default function Header({
             className="rounded-full h-40 w-40 flex"
             alt={`${fullName} profile picture`}
             src={`/images/avatars/${profileUsername}.jpg`}
-            // onError={(e) => {
-            //   e.target.src = DEFAULT_IMAGE_PATH;
-            // }}
+            onError={(e) => {
+              e.target.src = DEFAULT_IMAGE_PATH;
+            }}
           />
         ) : (
           <Skeleton circle height={150} width={150} count={1} />
         )}
       </div>
       <div className="flex items-center justify-center flex-col col-span-2">
-        <div className="container flex items-center">
+        <div className="container  flex items-center">
           <p className="text-2xl mr-4">{profileUsername}</p>
           {activeBtnFollow && isFollowingProfile === null ? (
             <Skeleton count={1} width={80} height={32} />
