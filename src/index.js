@@ -89,3 +89,11 @@ ReactDOM.render(
 
 /// === extra installation ===
 //  1) npm install @welldone-software/why-did-you-render --save-dev
+
+// for testing
+// 1) npm install -g loadtest
+// 2) loadtest --rps 10 http://localhost:3000
+
+// for deployment
+// 1) npm run build
+// 2) serve -s build
